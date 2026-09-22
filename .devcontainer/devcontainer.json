@@ -39,7 +39,7 @@
     }
   },
 
-  "postCreateCommand": "chmod +x mvnw && ./mvnw dependency:go-offline",
+  "postCreateCommand": "cd api && chmod +x mvnw && ./mvnw dependency:go-offline",
 
   "remoteUser": "vscode"
 }
