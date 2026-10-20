@@ -82,6 +82,7 @@ public class AlunoController {
 
    @DeleteMapping("/{id}")
    public ResponseEntity<Void> excluir(@PathVariable String id) {
+    
 
 
        if (service.buscarPorId(id).isEmpty()) {
@@ -94,5 +95,6 @@ public class AlunoController {
 
        return ResponseEntity.noContent().build();
    }
+   
 }
 
