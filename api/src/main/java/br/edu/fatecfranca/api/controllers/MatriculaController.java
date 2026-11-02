@@ -1,3 +1,4 @@
+
 package br.edu.fatecfranca.api.controllers;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.fatecfranca.api.dtos.MatriculaResponse;
 import br.edu.fatecfranca.api.models.Matricula;
 import br.edu.fatecfranca.api.services.MatriculaService;
 
@@ -26,29 +28,28 @@ public class MatriculaController {
         this.service = service;
     }
 
-       @GetMapping("/aluno/{alunoId}")
-   public List<Matricula> listarPorAluno(
-           @PathVariable String alunoId) {
-
-
-       return service.listarPorAluno(alunoId);
-   }
-
+    @GetMapping("/aluno/{alunoId}")
+    public List<MatriculaResponse> listarPorAluno(
+            @PathVariable String alunoId) {
+        return service.listarPorAluno(alunoId);
+    }
 
     @GetMapping
-    public List<Matricula> listarTodos() {
+    public List<MatriculaResponse> listarTodos() {
         return service.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Matricula> buscarPorId(@PathVariable String id) {
+    public ResponseEntity<MatriculaResponse> buscarPorId(
+            @PathVariable String id) {
         return service.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Matricula> criar(@RequestBody Matricula matricula) {
+    public ResponseEntity<Matricula> criar(
+            @RequestBody Matricula matricula) {
         Matricula salva = service.salvar(matricula);
 
         return ResponseEntity
@@ -71,7 +72,8 @@ public class MatriculaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable String id) {
+    public ResponseEntity<Void> excluir(
+            @PathVariable String id) {
 
         if (service.buscarPorId(id).isEmpty()) {
             return ResponseEntity.notFound().build();
